@@ -1,0 +1,91 @@
+<div style="margin: 20px;">
+  <h1 style="color: #008578;">Catálogo de Orquídeas</h1>
+  <p style="color: #CC986D;">Bienvenidos a nuestro catálogo, donde encontrarás una variedad de orquídeas exóticas y hermosas.</p>
+  
+      <table class="table table-bordered border-primary" style="width: 80%; margin: 20px auto; border: 2px solid #008578;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Color</th>
+            <th>Origen</th>
+            <th>Precio</th>
+            <th>Seleccionar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (orquidea of orquideas; track orquidea.id) {
+              <tr>
+                <td>{{ orquidea.id }}</td>
+                <td>{{ orquidea.nombre }}</td>
+                <td>{{ orquidea.color }}</td>
+                <td>{{ orquidea.origen }}</td>
+                <td>{{ orquidea.precio }}</td>
+                <td>
+                  <button type="button" class="btn" style="background-color: #008578; color: white;" (click)="selectOrquidea(orquidea)">Seleccionar</button>
+                </td>
+                <td>
+                  <button type="button" class="btn" style="background-color: red; color: white;" (click)="deleteOrquidea()">Eliminar</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+      </table>
+    
+      <div style="background-color: #F2F9F8; padding: 20px; border-radius: 8px;">
+        <h3 style="color: #008578;">Formulario de Orquídea</h3>
+        <div class="col-sm4">
+            <form [formGroup]="orquideaForm" (ngSubmit)="onSubmit()">
+                <p>
+                    ID:<input type="text" class="form-control"
+                    formControlName="id"/>
+                    @if (enviado && orquideaForm.get('id')?.errors?.['required']) {
+                        <span style="color: red;">Este campo es obligatoiro</span>
+                      }
+                </p>
+                <p>
+                    Especie:<input type="text" class="form-control"
+                    formControlName="nombre"/>
+                    @if (enviado && orquideaForm.get('nombre')?.errors?.['required']) {
+                        <span style="color: red;">Este campo es obligatoiro</span>
+                      }
+                  </p>
+                  <p>
+                    Color: <input type="text" class="form-control"
+                    formControlName="color">
+                    @if (enviado && orquideaForm.get('color')?.errors?.['required']) {
+                        <span style="color: red;">Este campo es obligatoiro</span>
+                      }
+                  </p>
+                  <p>
+                    Origen: <input type="text" class="form-control"
+                    formControlName="origen">
+                    @if (enviado && orquideaForm.get('origen')?.errors?.['required']) {
+                        <span style="color: red;">Este campo es obligatoiro</span>
+                      }
+                  </p>
+                  <p>
+                    Precio: <input type="number" class="form-control"
+                    formControlName="precio" step="0.01">
+                    @if (enviado && orquideaForm.get('precio')?.errors?.['required']) {
+                        <span style="color: red;">Este campo es obligatoiro</span>
+                      }
+                    @if (enviado && orquideaForm.get('precio')?.errors?.['min']) {
+                        <span style="color: red;">El precio debe ser mayor a 100</span>
+                      }
+                  </p>
+                  <p>
+                    <button type="submit" class="btn " style="background-color: green; color: white;"
+                    (click)="insertarOrquidea()">Agregar</button>
+
+                  </p>
+                  <p>
+                    <button type="button" class="btn " style="background-color: blue; color: white;"
+                    (click)="updateOrquidea()">Modificar</button>
+                  </p>
+            </form>    
+        </div>
+      </div>
+</div>
+  

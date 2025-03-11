@@ -1,0 +1,55 @@
+<div style="background-color:#111111; margin: 20px; padding: 20px;">
+  <h1 style="color:  white; font-family: 'Arial', sans-serif; text-align: center;">Catálogo de Productos</h1>
+
+  <!-- Tabla de productos -->
+  <table class="table table-bordered" style="border-color: #6a0dad; color: white; background-color: #1a1a1a;">
+      <thead>
+          <tr style="background-color: #6a0dad; color: white;">
+              <th>ID</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Seleccionar</th>
+              <th>Eliminar</th>
+          </tr>
+      </thead>
+      <tbody>
+          @for (producto of productos; track producto.id) {
+              <tr>
+                  <td>{{producto.id}}</td>
+                  <td>{{producto.descripcion}}</td>
+                  <td>{{producto.precio}}</td>
+                  <td>
+                      <button type="button" class="btn btn-warning" (click)="selectProducto(producto)" style="background-color:  #b2a4d4; border: none;">Seleccionar</button>
+                  </td>
+                  <td>
+                      <button type="button" class="btn btn-danger" (click)="deleteProducto()" style="background-color: red; border: none;">Eliminar</button>
+                  </td>
+              </tr>
+          }
+      </tbody>
+  </table>
+
+  <!-- Formulario para agregar/modificar productos -->
+  <div style="background-color:#b2a4d4;  padding: 20px; border-radius: 8px;">
+    <h3 style="color: #6a0dad;">Formulario de Productos</h3>
+      <p style="color: white;">
+          ID: <input type="text" class="form-control" [(ngModel)]="producto.id" style="background-color: white; color: black; border: 1px solid #6a0dad;">
+      </p>
+      <p style="color: white;">
+          Descripción: <input type="text" class="form-control" [(ngModel)]="producto.descripcion" style="background-color:white; color: black; border: 1px solid #6a0dad;">
+      </p>
+      <p style="color: white;">
+          Precio: <input type="text" class="form-control" [(ngModel)]="producto.precio" style="background-color: white; color: black; border: 1px solid #6a0dad;">
+      </p>
+      <table>
+          <tr>
+              <td>
+                  <button type="button" class="btn btn-success" (click)="insertarProducto()" style="background-color: green; border: none;">Agregar</button>
+              </td>
+              <td>
+                  <button type="button" class="btn btn-primary" (click)="updateProducto()" style="background-color: blue; border: none;">Modificar</button>
+              </td>
+          </tr>
+      </table>
+  </div>
+</div>
